@@ -72,3 +72,50 @@ images.forEach((element, index) => {
 });
 
 
+// aggiungo un eventlistener al pulsante prev 
+prev.addEventListener('click', () => {
+
+    // verifico se l'immagine attuale è la prima nell'array se sì passo all'ultima immagine
+    if (currentImg === 0) {
+        currentImg = images.length - 1;
+
+        //  altrimenti passo all'immagine precedente
+    } else {
+        currentImg = currentImg - 1;
+    }
+
+    // aggiornamento del carosello dopo il cambiamento dell'immagine
+    updateCarousel();
+});
+
+// aggiungo un eventlistener al pulsante next
+next.addEventListener('click', () => {
+
+    // si incrementa l'indice dell'immagine attuale per passare all'immagine successiva
+    currentImg = currentImg + 1;
+
+    // se l'immagine attuale è l'ultima nell'array allora torno alla prima immagine
+    if (currentImg === images.length) {
+        currentImg = 0;
+    }
+    // aggiornamento del carosello dopo il cambiamento dell'immagine
+    updateCarousel();
+});
+
+// funzione per aggiornare il carosello 
+function updateCarousel() {
+
+    // seleziono tutti gli elementi del carosello
+    const items = document.querySelectorAll('.item');
+
+    // itero attraverso gli elementi e aggiorno la classe "active" solo per l'elemento corrente
+    items.forEach((item, index) => {
+        if (index === currentImg) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+}
+
+
